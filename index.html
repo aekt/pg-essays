@@ -1,0 +1,25 @@
+<meta charset="UTF-8">
+<title>pg-essays</title>
+<script src="https://vuejs.org/js/vue.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<div id="app">
+  <div id="message">{{ message }}</div>
+  <div>
+    <table>
+      <tbody>
+        <tr v-for="item in items" v-if="!item.read" :key="item.link">
+          <td><input type="checkbox" v-model="item.read"></td>
+          <td><a :href="item.link">{{ item.title }}</a></td>
+        </tr>
+        <tr v-for="item in items" v-if="item.read" :key="item.link">
+          <td><input type="checkbox" v-model="item.read"></td>
+          <td><a :href="item.link">{{ item.title }}</a></td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script type="text/javascript" src="app.js"></script>
