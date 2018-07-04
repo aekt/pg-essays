@@ -1,0 +1,25 @@
+body {
+  margin: 0 auto;
+  padding: 1em;
+  line-height: 1.6em;
+  font-family: serif;
+  max-width: 30em;
+}
+
+div.message {
+  text-align: center;
+}
+
+a.btn, .fn a {
+  text-decoration: none;
+}
+
+a.btn {
+  color: #000;
+}
+
+.fn {
+  text-align: center;
+  font-size: 0.7em;
+  line-height: 1.1em;
+}

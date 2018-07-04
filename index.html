@@ -4,21 +4,68 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 
 <div id="app">
-  <div id="message">{{ message }}</div>
-  <div>
+  <div v-if="mode == 'failing'" class="msg">
+    Oops! Something went wrong :(.
+    <a class="btn" href="#" onclick="location.reload()">Reload</a>.
+  </div>
+
+  <div v-if="mode == 'loading'" class="msg">
+    Loading...
+  </div>
+  
+  <div v-if="mode == 'picking'">
     <table>
       <tbody>
-        <tr v-for="item in items" v-if="!item.read" :key="item.link">
-          <td><input type="checkbox" v-model="item.read"></td>
-          <td><a :href="item.link">{{ item.title }}</a></td>
+        <tr v-for="(item, index) in items" :key="item.link" v-if="!item.archived">
+          <td><input type="checkbox" v-model.lazy="item.archived"></td>
+          <td>
+            <a class="btn" href="#" @click="read(index)">
+              {{ item.title }}
+            </a>
+          </td>
         </tr>
-        <tr v-for="item in items" v-if="item.read" :key="item.link">
-          <td><input type="checkbox" v-model="item.read"></td>
-          <td><a :href="item.link">{{ item.title }}</a></td>
+        <tr v-for="(item, index) in items" :key="item.link" v-if="item.archived">
+          <td><input type="checkbox" v-model="item.archived"></td>
+          <td>
+            <a class="btn" href="#" @click="read(index)" class="archived">
+              {{ item.title }}
+            </a>
+          </td>
         </tr>
-        
       </tbody>
     </table>
+    <div class="fn">
+      Source is available on
+      <a href="https://github.com/aekt/pg-essays">GitHub</a>
+    </div>
+  </div>
+  
+  <div v-if="mode == 'reading'">
+    <div id="nav">
+      <a class="btn" href="#" @click="pick">
+        Back
+      </a>
+      |
+      <a class="btn" href="#" @click="pick({mark: true})">
+        Mark as {{ items[current].archived ? 'un' : '' }}read
+      </a>
+      |
+      <a class="btn" :href="items[current].link">
+        View original
+      </a>
+    </div>
+    <h3>{{ items[current].title }}</h3>
+    <div v-html="content"></div>
+    <div>
+      <a class="btn" href="#" onclick="scroll(0, 0)">
+        Top
+      </a>
+    </div>
+    <div class="fn">
+      Fetched from
+      <br>
+      <a :href="items[current].link">{{ items[current].link }}<a>
+    </div>
   </div>
 </div>
 
