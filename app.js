@@ -5,7 +5,7 @@ let vm = new Vue({
     items: [],
   },
   created: function() {
-    let proxy = 'http://cors-anywhere.herokuapp.com/';
+    let proxy = 'https://cors-anywhere.herokuapp.com/';
     let url = 'http://www.aaronsw.com/2002/feeds/pgessays.rss';
     fetch(proxy + url)
     .then(resp => resp.text())

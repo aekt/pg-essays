@@ -6,4 +6,4 @@ Contents are fetched from this
 
 The app uses
 [Vue.js](https://github.com/vuejs/vue) and
-[CORS Anywhere] (https://github.com/Rob--W/cors-anywhere/).
+[CORS Anywhere](https://github.com/Rob--W/cors-anywhere/).
