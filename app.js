@@ -51,7 +51,7 @@ let vm = new Vue({
         this.mode = 'reading';
       })
       .catch(() => {
-        this.mode = 'failing';
+        this.content = 'Unable to load content :(.';
       });
     },
     pick: function({mark = false}) {

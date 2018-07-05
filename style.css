@@ -6,7 +6,7 @@ body {
   max-width: 30em;
 }
 
-div.message {
+div.msg {
   text-align: center;
 }
 
@@ -19,7 +19,8 @@ a.btn {
 }
 
 .fn {
+  padding: 0 1em;
   text-align: center;
   font-size: 0.7em;
-  line-height: 1.1em;
+  line-height: 1em;
 }

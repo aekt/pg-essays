@@ -7,7 +7,10 @@
 <div id="app">
   <div v-if="mode == 'failing'" class="msg">
     Oops! Something went wrong :(.
-    <a class="btn" href="#" onclick="location.reload()">Reload</a>.
+    <br>
+    <a class="btn" href="#" onclick="location.reload()">
+      Reload
+    </a>.
   </div>
 
   <div v-if="mode == 'loading'" class="msg">
@@ -17,16 +20,24 @@
   <div v-if="mode == 'picking'">
     <table>
       <tbody>
-        <tr v-for="(item, index) in items" :key="item.link" v-if="!item.archived">
-          <td><input type="checkbox" v-model.lazy="item.archived"></td>
+        <tr v-for="(item, index) in items"
+            :key="item.link"
+            v-if="!item.archived">
+          <td>
+            <input type="checkbox" v-model.lazy="item.archived">
+          </td>
           <td>
             <a class="btn" href="#" @click="read(index)">
               {{ item.title }}
             </a>
           </td>
         </tr>
-        <tr v-for="(item, index) in items" :key="item.link" v-if="item.archived">
-          <td><input type="checkbox" v-model="item.archived"></td>
+        <tr v-for="(item, index) in items"
+            :key="item.link"
+            v-if="item.archived">
+          <td>
+            <input type="checkbox" v-model="item.archived">
+          </td>
           <td>
             <a class="btn" href="#" @click="read(index)" class="archived">
               {{ item.title }}
@@ -37,7 +48,9 @@
     </table>
     <div class="fn">
       Source is available on
-      <a href="https://github.com/aekt/pg-essays">GitHub</a>
+      <a href="https://github.com/aekt/pg-essays">
+        GitHub
+      </a>
     </div>
   </div>
   
@@ -51,12 +64,15 @@
         Mark as {{ items[current].archived ? 'un' : '' }}read
       </a>
       |
-      <a class="btn" :href="items[current].link">
+      <a class="btn" :href="items[current].link" target="_blank">
         View original
       </a>
     </div>
-    <h3>{{ items[current].title }}</h3>
-    <div v-html="content"></div>
+    <h3>
+      {{ items[current].title }
+    </h3>
+    <div v-html="content">
+    </div>
     <div>
       <a class="btn" href="#" onclick="scroll(0, 0)">
         Top
@@ -65,7 +81,9 @@
     <div class="fn">
       Fetched from
       <br>
-      <a :href="items[current].link">{{ items[current].link }}<a>
+      <a :href="items[current].link" target="_blank">
+        {{ items[current].link }}
+      <a>
     </div>
   </div>
 </div>
