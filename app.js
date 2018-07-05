@@ -53,8 +53,8 @@ let vm = new Vue({
       .then(text => {
         this.content = extract(text, 'font')[0];
       })
-      .catch(() => {
-        this.content = 'Unable to load content :(.';
+      .catch((e) => {
+        this.content = 'Unable to load content :(.\n' + e;
       })
       .finally(() => {
         this.mode = 'reading';
