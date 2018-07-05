@@ -23,7 +23,6 @@ let vm = new Vue({
   created: function() {
     let url = 'http://www.aaronsw.com/2002/feeds/pgessays.rss';
     let archives  = JSON.parse(localStorage.getItem('archives')) || [];
-    console.log(archives.length + ' items found!');
     fetch(proxy + url)
     .then(resp => resp.text())
     .then(text => {
@@ -32,9 +31,6 @@ let vm = new Vue({
         let title = extract(item, 'title')[0];
         let link = extract(item, 'link')[0];
         let archived = archives.indexOf(link) != -1;
-        if (archived) {
-          console.log('Found!');
-        }
         this.items.push({title, link, archived});
       }
       this.mode = 'picking';
@@ -80,7 +76,6 @@ let vm = new Vue({
           }
         }
         localStorage.setItem('archives', JSON.stringify(archives));
-        console.log(archives.length + ' items archived!');
       },
       deep: true,
     }
