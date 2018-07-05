@@ -1,7 +1,7 @@
 This is a simple page for reading
 [essays](http://paulgraham.com/articles.html) by
 [Paul Graham](http://paulgraham.com/),
-where the table of contents are fetched from this
+where the table of contents is fetched from this
 [RSS](http://www.aaronsw.com/2002/feeds/pgessays.rss).
 
 The app uses
