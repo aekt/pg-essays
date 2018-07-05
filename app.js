@@ -22,16 +22,20 @@ let vm = new Vue({
 
   created: function() {
     let url = 'http://www.aaronsw.com/2002/feeds/pgessays.rss';
+    let archives  = JSON.parse(localStorage.getItem('archives')) || [];
+    console.log(archives.length + ' items found!');
     fetch(proxy + url)
     .then(resp => resp.text())
     .then(text => {
       let list = extract(text, 'item');
       for (let item of list) {
-        this.items.push({
-          title: extract(item, 'title')[0],
-          link: extract(item, 'link')[0],
-          archived: false,
-        });
+        let title = extract(item, 'title')[0];
+        let link = extract(item, 'link')[0];
+        let archived = archives.indexOf(link) != -1;
+        if (archived) {
+          console.log('Found!');
+        }
+        this.items.push({title, link, archived});
       }
       this.mode = 'picking';
     })
@@ -51,7 +55,8 @@ let vm = new Vue({
       })
       .catch(() => {
         this.content = 'Unable to load content :(.';
-      }).finally(() => {
+      })
+      .finally(() => {
         this.mode = 'reading';
       });
     },
@@ -62,5 +67,21 @@ let vm = new Vue({
       }
       this.mode = 'picking';
     },
+  },
+
+  watch: {
+    items: {
+      handler: function() {
+        let archives = [];
+        for (let item of this.items) {
+          if (item.archived) {
+            archives.push(item.link);
+          }
+        }
+        localStorage.setItem('archives', JSON.stringify(archives));
+        console.log(archives.length + ' items archived!');
+      },
+      deep: true,
+    }
   },
 });
