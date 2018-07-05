@@ -5,7 +5,7 @@ let proxy = 'https://pristine-voyageurs-98160.herokuapp.com/';
 function extract(str, tag) {
   let reStr = '<' + tag + '[^>]*?>(.|\n)*?</' + tag + '>';
   let reTag = new RegExp(reStr, 'g');
-  let reInner = new RegExp('>(.|\n)*<');
+  let reInner = new RegExp('>(.|\n)*<', 'g');
   let matches = str.match(reTag);
   return matches.map(s => s.match(reInner)[0].slice(1, -1));
 }
@@ -54,7 +54,8 @@ let vm = new Vue({
         this.content = extract(text, 'font')[0];
       })
       .catch((e) => {
-        this.content = 'Unable to load content :(.\n' + e;
+        this.content = `Unable to load content :(.
+        ${e}`;
       })
       .finally(() => {
         this.mode = 'reading';
