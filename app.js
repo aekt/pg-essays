@@ -48,10 +48,11 @@ let vm = new Vue({
       .then(resp => resp.text())
       .then(text => {
         this.content = extract(text, 'font')[0];
-        this.mode = 'reading';
       })
       .catch(() => {
         this.content = 'Unable to load content :(.';
+      }).finally(() => {
+        this.mode = 'reading';
       });
     },
     pick: function({mark = false}) {
