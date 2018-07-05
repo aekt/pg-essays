@@ -1,8 +1,8 @@
 This is a simple page for reading
 [essays](http://paulgraham.com/articles.html) by
-[Paul Graham](http://paulgraham.com/).
-Contents are fetched from this
-[rss](http://www.aaronsw.com/2002/feeds/pgessays.rss).
+[Paul Graham](http://paulgraham.com/),
+where the table of contents are fetched from this
+[RSS](http://www.aaronsw.com/2002/feeds/pgessays.rss).
 
 The app uses
 [Vue.js](https://github.com/vuejs/vue) and
