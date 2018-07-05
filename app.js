@@ -3,11 +3,15 @@
 let proxy = 'https://pristine-voyageurs-98160.herokuapp.com/';
 
 function extract(str, tag) {
-  let reStr = '<' + tag + '[^>]*?>(.|\n)*?</' + tag + '>';
-  let reTag = new RegExp(reStr, 'g');
-  let reInner = new RegExp('>(.|\n)*<', 'g');
-  let matches = str.match(reTag);
-  return matches.map(s => s.match(reInner)[0].slice(1, -1));
+  try {
+    let reStr = '<' + tag + '[^>]*?>(.|\n)*?</' + tag + '>';
+    let reTag = new RegExp(reStr, 'g');
+    let reInner = new RegExp('>(.|\n)*<', 'g');
+    let matches = str.match(reTag);
+    return matches.map(s => s.match(reInner)[0].slice(1, -1));
+  } catch(e) {
+    return 'ExtractionError: ' + e;
+  }
 }
 
 let vm = new Vue({
@@ -48,19 +52,17 @@ let vm = new Vue({
       .then(resp => resp.text())
       .then(text => {
         this.content = extract(text, 'font')[0];
-      })
-      .catch((e) => {
-        this.content = `Unable to load content :(.
-        ${e}`;
-      })
-      .finally(() => {
         this.mode = 'reading';
       });
     },
     pick: function({mark = false}) {
       if (mark) {
-        let archived = this.items[this.current].archived;
-        this.items[this.current].archived = !archived;
+        let item = this.items[this.current];
+        Vue.set(this.items, this.current, {
+          title: item.title,
+          link: item.link,
+          archived: !item.archived
+        });
       }
       this.mode = 'picking';
     },
