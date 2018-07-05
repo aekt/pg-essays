@@ -2,9 +2,9 @@
 
 let proxy = 'https://pristine-voyageurs-98160.herokuapp.com/';
 
-function extract(str, tag) {
+function extract(str, tag, afap='?') {
   try {
-    let reStr = '<' + tag + '[^>]*?>(.|\n)*?</' + tag + '>';
+    let reStr = '<' + tag + '[^>]*?>(.|\n)*' + afap + '</' + tag + '>';
     let reTag = new RegExp(reStr, 'g');
     let reInner = new RegExp('>(.|\n)*<', 'g');
     let matches = str.match(reTag);
@@ -51,7 +51,7 @@ let vm = new Vue({
       fetch(proxy + this.items[index].link)
       .then(resp => resp.text())
       .then(text => {
-        this.content = extract(text, 'font')[0];
+        this.content = extract(text, 'font', '')[0];
         this.mode = 'reading';
       });
     },
