@@ -48,7 +48,7 @@ let vm = new Vue({
     read: function(index) {
       this.current = index;
       this.mode = 'loading';
-      fetch(proxy + this.items[index].link)
+      fetch(proxy + this.items[index].link + '?viewfullsite=1')
       .then(resp => resp.text())
       .then(text => {
         this.content = extract(text, 'font', '')[0];
